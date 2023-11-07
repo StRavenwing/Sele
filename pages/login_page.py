@@ -2,7 +2,6 @@ from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from .locators import LoginPageLocators
-import requests
 
 
 class LoginPage(BasePage):
@@ -12,7 +11,7 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        assert "login" in LoginPageLocators.LOGIN_URL, f"Ожидаемая подстрока 'login' не найдена в URL: {LoginPageLocators.LOGIN_URL}"
+        assert "login" in self.url, f"Ожидаемая подстрока 'login' не найдена в URL: {LoginPageLocators.LOGIN_URL}"
 
 
     def should_be_login_form(self):
