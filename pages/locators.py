@@ -1,6 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-from .base_page import BasePage
+
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
@@ -16,5 +20,4 @@ class ProductPageLocators():
     PRICE_ON_POP_UP = (By.XPATH, '//*[@id="messages"]/div[3]/div/p[1]/strong')
     NAME_ON_PAGE = (By.XPATH, '//*[@id="content_inner"]/article/div[1]/div[2]/h1')
     NAME_ON_POP_UP = (By.XPATH, '//*[@id="messages"]/div[1]/div/strong')
-
-#
+    SUCCESS_MESSAGE = (By.XPATH, '//*[@id="messages"]/div[1]')

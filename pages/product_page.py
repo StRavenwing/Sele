@@ -25,6 +25,14 @@ class ProductPage(BasePage):
         nameOM = self.browser.find_element(*ProductPageLocators.NAME_ON_POP_UP)
         assert nameOM.text == nameOP.text, f"Name of book {ProductPageLocators.NAME_ON_POP_UP} insteed {ProductPageLocators.NAME_ON_PAGE}"
 
+    def is_not_element_present(self):
+        super().is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+        
+    def should__not_be_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disapeared, but should be"
+
 
 
      
