@@ -5,6 +5,7 @@ import math
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from .locators import BasePageLocators
+from .locators import CartPageLocators
 
 
 class BasePage():
@@ -66,3 +67,7 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_cart_page(self):
+        button = self.browser.find_element(*CartPageLocators.BUTTON_GO_TO_CART)
+        button.click()

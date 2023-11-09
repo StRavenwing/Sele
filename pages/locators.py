@@ -21,3 +21,7 @@ class ProductPageLocators():
     NAME_ON_PAGE = (By.XPATH, '//*[@id="content_inner"]/article/div[1]/div[2]/h1')
     NAME_ON_POP_UP = (By.XPATH, '//*[@id="messages"]/div[1]/div/strong')
     SUCCESS_MESSAGE = (By.XPATH, '//*[@id="messages"]/div[1]')
+
+class CartPageLocators():
+    GOODS_IN_CART = (By.ID, "basket_formset")
+    BUTTON_GO_TO_CART = (By.XPATH, '//*[@id="default"]/header/div[1]/div/div[2]/span/a')
