@@ -1,4 +1,5 @@
 import pytest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,6 +8,9 @@ from pages.product_page import ProductPage
 from pages.locators import ProductPageLocators
 from pages.locators import CartPageLocators
 from pages.cart_page import CartPage
+from pages.login_page import LoginPage
+from pages.locators import LoginPageLocators
+
 
 #@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
                                  #"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
@@ -21,16 +25,38 @@ from pages.cart_page import CartPage
 #@pytest.mark.parametrize('link', ["okay_link",
                                   #pytest.param("bugged_link", marks=pytest.mark.xfail),
                                   #"okay_link"])
-def test_guest_can_add_product_to_basket(browser):
-    link = "https://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/?promo=newYear2019" #http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209/?promo=newYear"
-    page = ProductPage(browser,link)
-    page.open()
-    page.should_be_button_add_to_cart()
-    page.add_to_cart()
-    page.solve_quiz_and_get_code()
-    page.should_be_pop_up_cart()
-    page.check_name()
-    page.check_price()
+
+
+@pytest.mark.login
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        email = email = str(time.time()) + "@fakemail.org"
+        password = str(time.time())
+
+        link = "https://selenium1py.pythonanywhere.com/ru/accounts/login/"
+        page = LoginPage(browser, link)
+        page.open()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = "https://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207"
+        page = ProductPage(browser, link)
+        page.open()
+        page.is_not_element_present()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "https://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/?promo=newYear2019" #http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = ProductPage(browser,link)
+        page.open()
+        page.should_be_button_add_to_cart()
+        page.add_to_cart()
+        page.solve_quiz_and_get_code()
+        page.should_be_pop_up_cart()
+        page.check_name()
+        page.check_price()
     
 
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):

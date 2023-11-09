@@ -5,6 +5,7 @@ from selenium import webdriver
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
@@ -12,6 +13,10 @@ class LoginPageLocators():
     LOGIN_URL = (By.CSS_SELECTOR, "#login_url")
     LOGIN_FORM = (By.ID, "login_form")
     REGISTER_FORM = (By.ID, "register_form")
+    INPUT_EMAIL = (By.ID, "id_registration-email")
+    INPUT_PASWORD = (By.ID, "id_registration-password1")
+    INPUT_REPEAT_PASSWORD = (By.ID, "id_registration-password2")
+    REGISTER_BUTTON = (By.NAME, "registration_submit")
 
 class ProductPageLocators():
     BUTTON_ADD = (By.XPATH,'//*[@id="add_to_basket_form"]/button')
@@ -25,3 +30,4 @@ class ProductPageLocators():
 class CartPageLocators():
     GOODS_IN_CART = (By.ID, "basket_formset")
     BUTTON_GO_TO_CART = (By.XPATH, '//*[@id="default"]/header/div[1]/div/div[2]/span/a')
+
